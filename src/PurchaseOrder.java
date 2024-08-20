@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * A PurchaseOrder tracks a sales contract between Amazon and a vendor
  */
-public class PurchaseOrder {
+public final class PurchaseOrder {
     private final ZonedDateTime orderDate;
     private final BigDecimal subtotal;
     private final String vendor;
