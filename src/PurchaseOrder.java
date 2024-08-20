@@ -7,6 +7,11 @@ import java.util.List;
  * A PurchaseOrder tracks a sales contract between Amazon and a vendor
  */
 public class PurchaseOrder {
+    private final ZonedDateTime orderDate;
+    private final BigDecimal subtotal;
+    private final String vendor;
+    private final List<String> items;
+
 
     /**
      * Constructor.
@@ -16,8 +21,12 @@ public class PurchaseOrder {
      * @param items - List of items purchased.
      */
     public PurchaseOrder(ZonedDateTime orderDate, BigDecimal subtotal, String vendor, List<String> items) {
-
+        this.orderDate = orderDate;
+        this.subtotal = subtotal;
+        this.vendor = vendor;
+        this.items = new ArrayList<>(items);
     }
+
 
     /**
      * Determine the total billable cost including taxes.
@@ -25,7 +34,8 @@ public class PurchaseOrder {
      * @return Cost including tax rate.
      */
     public BigDecimal determineBillableCost(Double taxRate) {
-        return new BigDecimal("0.0");
+        BigDecimal taxMultiplier = new BigDecimal(1.0 + taxRate);
+        return subtotal.multiply(taxMultiplier);
     }
 
     /**
@@ -33,7 +43,7 @@ public class PurchaseOrder {
      * @return subtotal
      */
     public BigDecimal getSubtotal() {
-        return new BigDecimal("0.0");
+        return subtotal;
     }
 
     /**
@@ -41,7 +51,7 @@ public class PurchaseOrder {
      * @return vendor
      */
     public String getVendor() {
-        return "";
+        return vendor;
     }
 
     /**
@@ -49,7 +59,7 @@ public class PurchaseOrder {
      * @return item list
      */
     public List<String> getItems() {
-        return new ArrayList<String>();
+        return new ArrayList<String>(items);
     }
 
     /**
@@ -57,6 +67,6 @@ public class PurchaseOrder {
      * @return Order Date
      */
     public ZonedDateTime getOrderDate() {
-        return ZonedDateTime.now();
+        return orderDate;
     }
 }
