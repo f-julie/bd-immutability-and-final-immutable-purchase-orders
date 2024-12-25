@@ -27,7 +27,6 @@ public final class PurchaseOrder {
         this.items = new ArrayList<>(items);
     }
 
-
     /**
      * Determine the total billable cost including taxes.
      * @param taxRate - The appropriate tax rate.
